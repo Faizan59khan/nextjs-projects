@@ -1,5 +1,13 @@
 import React from "react";
 
+export async function generateStaticParams() {
+	const todos = await fetch("https://jsonplaceholder.typicode.com/todos").then((res) => res.json());
+
+	return todos.map((todo: any) => ({
+		id: todo.id,
+	}));
+}
+
 export const fetchingData = async (id: string) => {
 	const data = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
 		next: {
